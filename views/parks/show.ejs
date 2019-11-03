@@ -1,0 +1,52 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">
+                cool parks
+            </p>
+            <div class="list-group">
+                <li class="list-group-item">
+                    Info 1
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= park.image %>" />
+                <div class="caption-full">
+                    <h2><a href=""> <%= park.name %></a></h2>
+                    <p><%= park.description %></p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <% if (park.images) { %>
+                    <% park.images.forEach(function(image) { %>
+                        <div class="thumbnail">
+                            <img class="img-responsive" src="<%= image %>" />
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/parks/<%= park._id %>/comments/new">Add new comment</a>
+                </div>
+                <% park.comments.forEach(function(comment) { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right">3 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

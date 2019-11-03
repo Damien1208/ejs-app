@@ -1,0 +1,59 @@
+<%- include ../partials/header %>
+
+<div class="container">
+    <div class="raw">
+        <h1>new comment</h1>
+        <div style="width:30%; margin: 25px auto;">
+            <form action="/parks" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="image" placeholder="image">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="description" rows="10" placeholder="tell us about this park"></textarea>
+                    <!-- <input class="form-control" type="text" name="description" placeholder="tell us about this park" /> -->
+                </div>
+                <!-- <div class="form-group">
+                    <input class="form-control" type="text" name="location" placeholder="location">
+                </div> -->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="images" placeholder="more images">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="images" placeholder="more images">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="images" placeholder="more images">
+                </div>
+                <div class="form-group">
+                   <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ../partials/footer %>
+
+<!-- (function() {
+    var counter = 0;
+    var btn = document.getElementById('btn');
+    var form = document.getElementById('form');
+    var addInput = function() {
+      counter++;
+      var input = document.createElement("input");
+      input.id = 'input-' + counter;
+      input.type = 'text';
+      input.name = 'name';
+      input.placeholder = 'Input number ' + counter;
+      form.appendChild(input);
+    };
+    btn.addEventListener('click', function() {
+      addInput();
+    }.bind(this));
+  })();
+  <form id="form" action="">
+    </form>
+    <button id="btn" type="button">Click Me!</button> -->
