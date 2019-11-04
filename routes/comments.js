@@ -2,6 +2,7 @@ var express = require("express"),
     router = express.Router({ mergeParams: true }),
     Comment = require("../models/comment"),
     Park = require("../models/parks")
+    isLoggedIn = require("../middleware/auth");
 
 // COMMENTS ROUTES
 router.get("/new", isLoggedIn, function (req, res) {
@@ -16,10 +17,7 @@ router.get("/new", isLoggedIn, function (req, res) {
 
 
 router.post("/", isLoggedIn, function (req, res) {
-    console.log(req.body.comment)
-    console.log(req.params.id)
     Park.findById(req.params.id, function (err, park) {
-        console.log('comment', park)
         if (err) {
             console.log(err);
             res.redirect("/parks");
@@ -30,6 +28,7 @@ router.post("/", isLoggedIn, function (req, res) {
                 } else {
                     comment.author.id = req.user._id;
                     comment.author.username = req.user.username;
+                    comment.date = new Date().toDateString();
                     comment.save();
                     park.comments.push(comment);
                     park.save();
@@ -39,13 +38,5 @@ router.post("/", isLoggedIn, function (req, res) {
         }
     });
 });
-
-// Middleware
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-};
 
 module.exports = router;

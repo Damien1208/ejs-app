@@ -1,6 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var Park = require("../models/parks");
+var express = require("express"),
+    router = express.Router(),
+    Park = require("../models/parks"),
+    isLoggedIn = require("../middleware/auth");
 
 // INDEX
 router.get("/", function (req, res) {
@@ -14,7 +15,7 @@ router.get("/", function (req, res) {
 });
 
 // CREATE
-router.post("/", function (req, res) {
+router.post("/", isLoggedIn, function (req, res) {
     // add in update as well line below
     //req.body.blog.body = req.sanitize(req.body.blog.body);
 
@@ -39,13 +40,20 @@ router.post("/", function (req, res) {
 });
 
 // NEW
-router.get("/new", function (req, res) {
+router.get("/new", isLoggedIn, function (req, res) {
     res.render("parks/new");
 });
 
 // EDIT
 router.get("/:id/edit", function (req, res) {
-
+    Park.findById(req.params.id, function(err, foundPark) {
+        if (err) {
+            console.log(err);
+            res.redirect("/parks")
+        } else {
+            res.render("parks/edit", { park: foundPark });
+        }
+    });
 });
 
 // SHOW
@@ -60,7 +68,25 @@ router.get("/:id", function (req, res) {
 });
 
 // UPDATE
+router.put("/:id", function (req, res) {
+    Park.findByIdAndUpdate(req.params.id, req.body.park, function(err, updatedPark) {
+        if (err) {
+            res.redirect("/parks");
+        } else {
+            res.redirect("/parks/" + updatedPark._id);
+        }
+    });
+});
 
 // DELETE
+router.delete("/:id", function (req, res) {
+    Park.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            res.redirect("/parks");
+        } else {
+            res.redirect("/parks");
+        }
+    });
+});
 
 module.exports = router;

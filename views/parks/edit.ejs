@@ -2,23 +2,28 @@
 
 <div class="container">
     <div class="raw">
-        <h1>enter a new park</h1>
+        <h1>You are about to modify : <%=  park.name %></h1>
         <div style="width:30%; margin: 25px auto;">
-            <form action="/parks" method="POST">
+            <form action="/parks/<%= park._id %>?_method=PUT" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="name" placeholder="name">
+                    <input class="form-control" type="text" name="park[name]" value="<%= park.name %>">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="image" placeholder="image">
+                    <input class="form-control" type="text" name="park[image]" value="<%= park.image %>">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" name="description" rows="10"
-                        placeholder="tell us about this park"></textarea>
+                    <input class="form-control" type="text" name="park[description]" value="<%= park.description %>" />
                 </div>
                 <div class="form-group">
                     <a id="btn" class="" href="#">add more images</a>
                 </div>
-                <div class="form-group" id="form"></div>
+                <div class="form-group" id="form">
+                    <% if(park.images) { %>
+                     <%   park.images.forEach(function(image) { %>
+                        <input class="form-control" type="text" name="park[images]" value="<%= image %>>">
+                      <%  }); %>
+                    <% } %>
+                </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
@@ -37,7 +42,7 @@
             var input = document.createElement("input");
             input.class = 'from-control';
             input.type = 'text';
-            input.name = 'images';
+            input.name = 'park[images]';
             input.placeholder = 'Add one more image';
             form.appendChild(input);
         };
