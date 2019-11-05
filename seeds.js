@@ -10,7 +10,11 @@ var data = [
         images: [
             "https://tse3.mm.bing.net/th?id=OIP.RLsrvcnO2la8G0fB9O_yMQHaFj&pid=Api&P=0&w=220&h=166",
             "https://tse2.mm.bing.net/th?id=OIP.yugYAgafrrgVpovgu5ZbTwHaE8&pid=Api&P=0&w=254&h=170"
-        ]
+        ],
+        author: {
+            id: '5dbedabfeb15ab26483f1763',
+            username: 'damien'
+        }
     },
     {
         name:"Körnerpark",
@@ -19,7 +23,11 @@ var data = [
         images: [
             "https://tse1.mm.bing.net/th?id=OIP.N7rdxHjpriTK3IFK5G0RZQHaE7&pid=Api&P=0&w=267&h=178",
             "https://tse3.mm.bing.net/th?id=OIP.Ahd7Ckc_PMfZky_bvQ_FNgHaE7&pid=Api&P=0&w=278&h=186"
-        ]
+        ],
+        author: {
+            id: '5dbedabfeb15ab26483f1763',
+            username: 'damien'
+        }
     }
 ];
 
@@ -41,7 +49,10 @@ function seedDB() {
                     Comment.create(
                         {
                             text: "Great park in Berlin",
-                            author: "Betina"
+                            author: {
+                                id: '5dbedabfeb15ab26483f1763',
+                                username: 'damien'
+                            }
                         }, function(err, comment) {
                             if (err) {
                                 console.log(err);

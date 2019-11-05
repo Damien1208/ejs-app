@@ -25,10 +25,12 @@
                 <div class="caption-full">
                     <h2><a href=""> <%= park.name %></a></h2>
                     <p><%= park.description %></p>
+                    <% if (currentUser && park.author.id.equals(currentUser._id)) { %>
                     <a class="btn btn-warning" href="/parks/<%= park._id %>/edit">Edit</a>
                     <form id="delete-form" action="/parks/<%= park._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <div class="well">
@@ -43,6 +45,14 @@
                         <p>
                             <%= comment.text %>
                         </p>
+                        <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                            <a class="btn btn-xs btn-warning"
+                                href="/parks/<%= park._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                            <form id="delete-form"
+                                action="/parks/<%= park._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-xs btn-danger">Delete</button>
+                            </form>
+                        <% } %>
                     </div>
                 </div>
                 <% }) %>

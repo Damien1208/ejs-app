@@ -1,7 +1,7 @@
 var express = require("express"),
     router = express.Router(),
     Park = require("../models/parks"),
-    isLoggedIn = require("../middleware/auth");
+    middleware = require("../middleware");
 
 // INDEX
 router.get("/", function (req, res) {
@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
 });
 
 // CREATE
-router.post("/", isLoggedIn, function (req, res) {
+router.post("/", middleware.isLoggedIn, function (req, res) {
     // add in update as well line below
     //req.body.blog.body = req.sanitize(req.body.blog.body);
 
@@ -23,32 +23,38 @@ router.post("/", isLoggedIn, function (req, res) {
     var image = req.body.image;
     var descr = req.body.description;
     var images = req.body.images;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
     var newPark =
     {
         name: name,
         image: image,
         description: descr,
-        images: [images]
+        images: [images],
+        author: author
     }
     Park.create(newPark, function (err, newlyCreated) {
         if (err) {
             console.log(err);
         } else {
+            req.flash("success", "Your park has been added!");
             res.redirect("/parks");
         }
     });
 });
 
 // NEW
-router.get("/new", isLoggedIn, function (req, res) {
+router.get("/new",  middleware.isLoggedIn, function (req, res) {
     res.render("parks/new");
 });
 
 // EDIT
-router.get("/:id/edit", function (req, res) {
-    Park.findById(req.params.id, function(err, foundPark) {
+router.get("/:id/edit", middleware.checkParkOwnership, function (req, res) {
+    Park.findById(req.params.id, function (err, foundPark) {
         if (err) {
-            console.log(err);
+            req.flash("error", "Park not found!");
             res.redirect("/parks")
         } else {
             res.render("parks/edit", { park: foundPark });
@@ -59,8 +65,9 @@ router.get("/:id/edit", function (req, res) {
 // SHOW
 router.get("/:id", function (req, res) {
     Park.findById(req.params.id).populate("comments").exec(function (err, foundPark) {
-        if (err) {
-            console.log(err);
+        if (err || !foundPark) {
+            req.flash("error", "Park not found!");
+            res.redirect("/parks");
         } else {
             res.render("parks/show", { park: foundPark });
         }
@@ -68,8 +75,8 @@ router.get("/:id", function (req, res) {
 });
 
 // UPDATE
-router.put("/:id", function (req, res) {
-    Park.findByIdAndUpdate(req.params.id, req.body.park, function(err, updatedPark) {
+router.put("/:id", middleware.checkParkOwnership, function (req, res) {
+    Park.findByIdAndUpdate(req.params.id, req.body.park, function (err, updatedPark) {
         if (err) {
             res.redirect("/parks");
         } else {
@@ -79,7 +86,7 @@ router.put("/:id", function (req, res) {
 });
 
 // DELETE
-router.delete("/:id", function (req, res) {
+router.delete("/:id", middleware.checkParkOwnership, function (req, res) {
     Park.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.redirect("/parks");
