@@ -14,7 +14,10 @@ var parksRoutes     = require("./routes/parks"),
     commentsRoutes  = require("./routes/comments"),
     authRoutes      = require("./routes/index");
 
-mongoose.connect("mongodb://localhost:27017/cool-parks", { useNewUrlParser: true, useUnifiedTopology: true })
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/cool-parks";
+
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public/"));
