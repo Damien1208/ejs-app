@@ -53,6 +53,7 @@ app.use("/parks/:id/comments", commentsRoutes);
 app.use("/parks", parksRoutes);
 
 // listen server started
-app.listen(3000, function () {
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
     console.log("server has started at port 3000")
 });
