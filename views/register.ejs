@@ -1,12 +1,10 @@
 <% include partials/header %>
 
-<h1>Register page</h1>
-
 <div class="container">
-    <div class="raw">
+    <div class="raw" style="width:30%; margin: 25px auto;">
         <h1>Register</h1>
         <form action="/register" method="POST">
-            <div style="width:30%; margin: 25px auto;">
+            <div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="username" placeholder="username">
                 </div>
@@ -17,8 +15,7 @@
                     <button class="btn btn-lg btn-primary btn-block">Sign up</button>
                 </div>
             </div>
+            <a href="/parks" class="btn btn-success">Go back</a>
         </form>
     </div>
 </div>
-
-<% include partials/footer %>

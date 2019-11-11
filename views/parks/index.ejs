@@ -3,7 +3,8 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h2>This is the parks page</h2>
+            <h2>See below our selection of parks</h2>
+            <p>You can as well add your favourite park to our selection</p>
             <p>
                 <a class="btn btn-primary btn-large" href="/parks/new">Add a new park</a>
             </p>
@@ -25,12 +26,13 @@
                         <%= park.description.slice(0, 100)%>...
                     </span>
                 </div>
+                <p>
+                        <a class="btn btn-primary" href="/parks/<%= park._id %>">
+                            Read more
+                        </a>
+                    </p>
             </div>
-            <p>
-                <a class="btn btn-primary" href="/parks/<%= park._id %>">
-                    Read more
-                </a>
-            </p>
+           
 
         </div>
         <% }) %>

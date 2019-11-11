@@ -43,13 +43,13 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
 
 // edit an existing comment
 router.get("/:comment_id/edit", function(req, res) {
-    Park.findById(req.params.id, function (res, foundPark) {
+    Park.findById(req.params.id, function (err, foundPark) {
         if (err || !foundPark) {
             req.flash("error", "Park not found!");
             res.redirect("back");
         } else {
             Comment.findById(req.params.comment_id, middleware.checkCommentOwnership, function (err, foundComment) {
-                if (err || !foundComment) {
+                if (err) {
                     res.redirect("back");
                 } else {
                     res.render("comments/edit", { park_id: req.params.id, comment: foundComment, parkName: req.params.name });

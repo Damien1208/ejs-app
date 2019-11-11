@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="raw">
-        <h1>You are about to modify : <%=  park.name %></h1>
+        <h1 style="width:50%; margin: 25px auto;">You are about to modify : <%=  park.name %></h1>
         <div style="width:30%; margin: 25px auto;">
             <form action="/parks/<%= park._id %>?_method=PUT" method="POST">
                 <div class="form-group">
@@ -22,7 +22,7 @@
 
                     <%   park.images.forEach(function(image) { %>
                     <label>Additional images</label>
-                    <input class="form-control" type="text" name="park[images]" value="<%= image %>>">
+                    <input class="form-control" type="text" name="park[images]" value="<%= image %>">
                     <%  }); %>
                     <% } %>
                 </div>
@@ -32,12 +32,12 @@
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
+                <a href="/parks" class="btn btn-success">Go back</a>
             </form>
         </div>
     </div>
 </div>
 
-<%- include ../partials/footer %>
 
 <script>
     (function () {

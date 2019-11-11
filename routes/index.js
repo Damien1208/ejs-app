@@ -18,11 +18,11 @@ router.get("/register", function (req, res) {
 router.post("/register", function (req, res) {
     User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
         if (err) {
-            req.flash("error", err.message);
             res.redirect("register");
         }
         passport.authenticate("local")(req, res, function () {
-            req.flash("success", "Welcome to Cool Parks" + user.username);
+            console.log(user)
+            req.flash("success", "Welcome to CoolParks " + user.username);
             res.redirect("/parks");
         });
     });

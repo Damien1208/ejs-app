@@ -1,34 +1,61 @@
-<% include ./partials/header %>
+<!DOCTYPE html>
+<html>
 
-<style>
-    body {
-        background-image: url('https://images.unsplash.com/photo-1530333968383-25e00ca4573f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-</style>
+<head>
+    <title>CoolParks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../landing.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"
+        async></script>
+</head>
 
-<div class="container">
-    <header class="jumbotron">
-        <div class="container">
-            <h1>Welcome to Cool Parks in Berlin!</h1>
-            <p>Berliners! Travelers from around the world! Discover a green heaven at your door step!</p>
+<body>
+
+
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
         </div>
-    </header>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <% } %>
 
-    
-    <p>
-        <a class="btn btn-primary btn-large" href="/parks">See all parks</a>
-    </p>
 
-    <!-- <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-                <div class="caption">
-                </div>
+
+        <div id="landing-header">
+            <div class="title">
+                <p>Welcome to CoolParks</p>
             </div>
-        </div>
-    </div> -->
-</div>
 
-<% include ./partials/footer %>
+            <div class="container">
+
+                <header class="jumbotron">
+
+                    <div class="container">
+                        <p><em>Berliners! Berlin visitors! Discover a green heaven at your door step!</em></p>
+                        <p><em>There are hundreds of parks and gardens in Berlin that offer refuge from the speed and
+                            bustling activity of a thriving metropolis. One of the greenest cities in the world, you can
+                            stroll through the vast central Tiergarten, enjoy the baroque grounds of Charlottenburg
+                            Palace Gardens or take a walk in the fashionable Mauerpark. A beautiful and relaxing place
+                            close to nature is never far away in Berlin.</em></p>
+                    </div>
+                </header>
+            </div>
+            <a href="/parks" class="btn btn-lg btn-success">View all parks</a>
+        </div>
+
+
+
+        <ul class="slideshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
