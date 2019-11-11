@@ -16,8 +16,15 @@ var parksRoutes     = require("./routes/parks"),
 
 var url = process.env.DATABASEURL || "mongodb://localhost:27017/cool-parks";
 
-// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.connect('mongodb+srv://damienderail:45r%24U%21Srjg@cluster0-j5uuc.gcp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+// mongoose.connect('mongodb+srv://damienderail:45r%24U%21Srjg@cluster0-j5uuc.gcp.mongodb.net/test?retryWrites=true&w=majority', { 
+//     useNewUrlParser: true, 
+//     useUnifiedTopology: true 
+// }),then(() => {
+//     console.log('connected to db')
+// }).ctach(err => {
+//     console.log('error', err.message
+// })
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
