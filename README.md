@@ -5,7 +5,7 @@ The main purpose is to show how to use passport and connect-flash for authentica
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for developmen purposes.
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
 ### Prerequisites
 
