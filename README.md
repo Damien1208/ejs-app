@@ -1,3 +1,3 @@
 # ejs-test
 
-![]('images/screenshots/screenshot1.png')
+![](images/screenshots/screenshot1.png)
