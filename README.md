@@ -3,7 +3,7 @@
 An ejs (embedded javascript) app that allows a community of people living in Berlin share their tips on where to find the best park area to relax.
 The main purpose is to show how to use passport and connect-flash for authentication and authorization. Letting people create and edit in their own space and not in other user space.
 
-Deploy version : https://arcane-cliffs-62342.herokuapp.com/
+Link to the deployed project : https://arcane-cliffs-62342.herokuapp.com/
 
 ## Getting Started
 
