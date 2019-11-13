@@ -16,13 +16,10 @@ router.get("/", function (req, res) {
 
 // CREATE
 router.post("/", middleware.isLoggedIn, function (req, res) {
-    // add in update as well line below
-    req.body.blog.body = req.sanitize(req.body.blog.body);
-
-    var name = req.body.name;
-    var image = req.body.image;
-    var descr = req.body.description;
-    var images = req.body.images;
+    var name = req.sanitize(req.body.name);
+    var image = req.sanitize(req.body.image);
+    var descr = req.sanitize(req.body.description);
+    var images = req.sanitize(req.body.images);
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -91,6 +88,7 @@ router.delete("/:id", middleware.checkParkOwnership, function (req, res) {
         if (err) {
             res.redirect("/parks");
         } else {
+            req.flash("success", "Park successfully deleted!");
             res.redirect("/parks");
         }
     });
