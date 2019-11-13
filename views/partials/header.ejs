@@ -18,7 +18,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     <% if (currentUser) { %>
-                    Welcome <%= currentUser.username.toUpperCase() %> !
+                    / Welcome <%= currentUser.username.toUpperCase() %> !
                     <% } %>
                 </a>
             </div>
@@ -43,7 +43,7 @@
         <% } %>
         <% if (success && success.length > 0) { %>
             <div 
-                class="alert alert-danger" 
+                class="alert alert-success" 
                 role="alert"><%= success %>
             </div>
         <% } %>

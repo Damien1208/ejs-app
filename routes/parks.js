@@ -17,7 +17,7 @@ router.get("/", function (req, res) {
 // CREATE
 router.post("/", middleware.isLoggedIn, function (req, res) {
     // add in update as well line below
-    //req.body.blog.body = req.sanitize(req.body.blog.body);
+    req.body.blog.body = req.sanitize(req.body.blog.body);
 
     var name = req.body.name;
     var image = req.body.image;
