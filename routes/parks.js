@@ -73,7 +73,24 @@ router.get("/:id", function (req, res) {
 
 // UPDATE
 router.put("/:id", middleware.checkParkOwnership, function (req, res) {
-    Park.findByIdAndUpdate(req.params.id, req.body.park, function (err, updatedPark) {
+    var park = req.body.park
+    var name = req.sanitize(park.name);
+    var image = req.sanitize(park.image);
+    var descr = req.sanitize(park.description);
+    var images = req.sanitize(park.images);
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    var updatePark =
+    {
+        name: name,
+        image: image,
+        description: descr,
+        images: [images],
+        author: author
+    }
+    Park.findByIdAndUpdate(req.params.id, updatePark, function (err, updatedPark) {
         if (err) {
             res.redirect("/parks");
         } else {
